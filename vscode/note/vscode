@@ -1,0 +1,33 @@
+# 									 vscode-ubuntu区域
+
+几种常见的ssh连接到ubuntu系统：
+	1-vscode 2-MobaXterm - 此终端和windows电脑交互上传下载文件方便。
+	3-windows自带的powershell终端，shift+右键-打开powershell-ssh feng@192.168.x.x-输入密码即可；其中feng是ubuntu里面的用户，密码也是这个feng用户对应的密码，192.168.x.x是feng这个用户的ip，用ifconfig查看。
+
+vscode:
+ctr+f 创建文件  
+ctr+d 创建目录
+ctr+j 创建声明和定义
+
+ctr+shift+"+",放大ubuntu界面，ctr+"-"缩小；ctr+"+"放大vscode界面，ctr+"-"缩小vscode界面
+
+vim中注释：1-随便注释几行代码：ctr+v 上下方向键竖着选中行数 gc 即可；取消则一样的方式。(注意取消时竖选要选相同的行数，否则不是取消而是再次注释)
+
+vscode终端取决于你选的哪个，选择powershell 还是 windows下的cmd终端，前者有类似linux指令的功能后者不支持；这两个终端一般都默认编码为GBK,而我们编写代码时大多采用utf-8，这就会造成乱码情况；使用chcp可查看当前终端编码格式，chcp 65001可暂时在现在将编码改为utf-8，但是运行新的时还是默认的BGK；
+1-使用cmd终端时，可在task.json里面的args区域内加上"-fexec-charset=GBK",这样虽然我们编写代码采用的utf-8但是我们在编译时用前面参数转化为了GBK,和cmd编码GBK一致则不会乱码。
+2-对于使用powershell终端，可先将代码编码设置为utf-8保存再编译，编译后改过来即可，当然一劳永逸的解决方法是将powershell终端和cmd终端都改成utf-8(不建议，可能对其余有影响)这样vscode无论选用那个终端都是utf-8和代码编码utf-8一致而不会造成乱码。
+```
+
+vscode打开文件乱码：这是编码格式的问题，通过编码重新打开后，别忘了再次通过编码重新打开回来。即使使用编码为utf-8,通过设置参数 -fexec-charset=GBK 将编码变为GBk在cmd终端不会乱码，然而可能在powershell上使用chcp 65001虽然暂时将powershell终端编码变为GBK但是读取文件时里面内容可能仍然存在乱码现象。
+
+vscode报错：error: ld returned 1 exit status 并且main出现多次报错 --是因为在tasks.json中args里面，没有将要编译的目录文件下由多文件编译"${fileDirname}\\*.c"改为单文件编译"${file}"造成。
+
+
+
+											学习区域：
+
+
+```c
+-www.subingwen.cn  
+-B站：爱编程的大丙                           
+```
